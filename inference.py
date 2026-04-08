@@ -3,11 +3,15 @@ import json
 import requests
 from openai import OpenAI
 
-API_KEY = os.getenv("HF_TOKEN") or os.getenv("API_KEY")
+HF_TOKEN = os.getenv("HF_TOKEN")
+
 API_BASE_URL = os.getenv("API_BASE_URL", "https://router.huggingface.co/v1")
 MODEL_NAME = os.getenv("MODEL_NAME", "Qwen/Qwen2.5-72B-Instruct")
 ENV_URL = os.getenv("ENV_URL", "http://localhost:8000")
 BENCHMARK = "meeting_notes_env"
+
+client = OpenAI(base_url=API_BASE_URL, api_key=HF_TOKEN)
+
 
 SYSTEM_PROMPT = """
 You will be given a meeting transcript.
@@ -94,7 +98,6 @@ def run_task(client, task_name):
     return reward
 
 def main():
-    client = OpenAI(base_url=API_BASE_URL, api_key=API_KEY)
     
     for task in ["easy", "medium", "hard"]:
         run_task(client, task)
