@@ -1,0 +1,17 @@
+spec_version: 1
+name: meeting_notes_env
+type: space
+runtime: fastapi
+app: server.app:app
+port: 8000
+description: "An RL environment where agents extract action items from meeting transcripts"
+tasks:
+  - name: easy
+    description: "Short 1:1 meeting with 2 clear action items, explicit assignees and deadlines"
+    difficulty: easy
+  - name: medium
+    description: "Team sprint planning with 4 action items, some implicit deadlines"
+    difficulty: medium
+  - name: hard
+    description: "Multi-stakeholder executive meeting with complex dependencies and 5 action items"
+    difficulty: hard
